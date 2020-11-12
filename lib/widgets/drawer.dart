@@ -21,7 +21,7 @@ class MainDrawer extends StatelessWidget {
           ),
           child: Row(children: [
             Container(
-              padding: EdgeInsets.only(right: 25),
+              padding: EdgeInsets.only(right: 10),
               child: Image.asset(
                 'assets/avatar.png',
                 width: 100,
@@ -29,14 +29,16 @@ class MainDrawer extends StatelessWidget {
               ),
             ),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   padding: EdgeInsets.only(top: 25),
                   child: Text(
-                    'Bievenido a Karma !',
+                    'Bievenido a Karma!',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 18,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold
                     ),
                   ),
                 ),
@@ -46,7 +48,7 @@ class MainDrawer extends StatelessWidget {
                     'Juan Rambal',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 18,
+                      fontSize: 16,
                     ),
                   ),
                 ),
@@ -58,8 +60,8 @@ class MainDrawer extends StatelessWidget {
                         child: Image.asset(
                           'assets/ic_karma.png',
                           color: Colors.white,
-                          width: 28,
-                          height: 28,
+                          width: 22,
+                          height: 22,
                         ),
                       ),
                       Text('2',

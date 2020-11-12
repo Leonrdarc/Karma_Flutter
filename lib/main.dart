@@ -1,8 +1,8 @@
+import 'package:Karma_flutter/widgets/login.dart';
 import 'package:Karma_flutter/widgets/taskState.dart';
 import 'package:Karma_flutter/widgets/taskslist.dart';
 import 'package:Karma_flutter/widgets/register.dart';
 import 'package:Karma_flutter/widgets/profile.dart';
-import 'package:Karma_flutter/widgets/login.dart';
 import 'package:flutter/material.dart';
 
 const primary = Color(0xffF76D98);
@@ -33,9 +33,10 @@ class _MyHomePageState extends State<MyHomePage> {
       },
       theme: ThemeData(
         brightness: Brightness.light,
-        primaryColor: primary,
-        accentColor: accent,
-        primarySwatch: Colors.red,
+        primaryColor: Color(0xffF04A75),
+        primaryColorLight: Color(0xFFF76D98),
+        accentColor: Color(0xFF1EDD28),
+        primarySwatch: Colors.pink,
       ),
     );
   }

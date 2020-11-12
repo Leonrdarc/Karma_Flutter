@@ -56,7 +56,8 @@ class Login extends StatelessWidget {
           Container(
             width: 300,
             child: TextField(
-              obscureText: true,
+              keyboardType: TextInputType.emailAddress,
+              obscureText: false,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Correo',

@@ -1,15 +1,13 @@
+import 'package:Karma_flutter/widgets/chat.dart';
 import 'package:Karma_flutter/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
-const primary = Color(0xffF76D98);
-const accent = Color(0xffF04A75);
 
 class TaskStateApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Karma',
-        color: Color(0xffDD969C),
         home: Scaffold(
           // resizeToAvoidBottomInset: false,
           appBar: AppBar(
@@ -21,8 +19,11 @@ class TaskStateApp extends StatelessWidget {
           ),
         ),
         theme: ThemeData(
-          primaryColor: primary,
-          accentColor: accent,
+          brightness: Brightness.light,
+          primaryColor: Color(0xffF04A75),
+          primaryColorLight: Color(0xFFF76D98),
+          accentColor: Color(0xFF1EDD28),
+          primarySwatch: Colors.pink,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ));
   }
@@ -31,113 +32,122 @@ class TaskStateApp extends StatelessWidget {
 class TaskState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(children: [
-        Container(
-            padding: EdgeInsets.fromLTRB(0, 32, 0, 0),
-            child: Text(
-              'Estado de tu favor',
-              style: TextStyle(
-                  color: primary, fontWeight: FontWeight.bold, fontSize: 22),
-            )),
-        Container(
-            padding: EdgeInsets.fromLTRB(0, 32, 0, 32),
-            child: Icon(
-              Icons.check_circle_outline,
-              color: Colors.grey[400],
-              size: 250,
-            )),
-        Container(
-            child: Text(
-          'Tu favor ha sido entregado y verificado correctamente',
-          style: TextStyle(color: Colors.grey, fontSize: 14),
-        )),
-        Container(
-            padding: EdgeInsets.only(top: 12),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.work,
-                  color: primary,
-                ),
-                Text(
-                  'Sacar Fotocopias',
-                  style: TextStyle(
-                      color: primary,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold),
+    return 
+    Container(
+      margin: EdgeInsets.all(50),
+      child: 
+        Column(children: [
+          Container(
+              child: Text(
+                'Estado de tu favor',
+                style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold, fontSize: 26),
+                textAlign: TextAlign.center,
                 )
-              ],
-            )),
-        Container(
-            padding: EdgeInsets.only(top: 5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.location_on, color: primary),
-                Text(
-                  'Bambú 2',
-                  style: TextStyle(
-                      color: primary,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold),
-                )
-              ],
-            )),
-        Container(
-            padding: EdgeInsets.fromLTRB(64, 24, 0, 64),
-            alignment: Alignment.center,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(
-                    child: Text(
-                  'Descripción',
-                  style: TextStyle(
-                      color: primary,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold),
-                )),
-                Container(
-                    padding: EdgeInsets.only(top: 12),
-                    child: Text(
-                      'Codigo: RT2512Y, imprimir las primeras 14 páginas',
-                      style: TextStyle(
-                        color: Colors.grey,
+              ),
+          Container(
+              padding: EdgeInsets.symmetric(vertical: 20),
+              child: Icon(
+                Icons.check_circle_outline,
+                color: Colors.grey[400],
+                size: 200,
+              )),
+          Container(
+            child: Text(
+              'Tu favor ha sido entregado y verificado correctamente',
+              style: TextStyle(color: Colors.grey, fontSize: 14),
+              textAlign: TextAlign.center,
+            )
+          ),
+          Container(
+              padding: EdgeInsets.only(top: 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.work_outline,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  Text(
+                    'Sacar Fotocopias',
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor,
                         fontSize: 14,
-                      ),
-                    )),
-                Container(
-                    padding: EdgeInsets.only(top: 12),
-                    child: Text(
-                      'Comentarios',
-                      style: TextStyle(
-                          color: primary,
+                        fontWeight: FontWeight.bold),
+                  )
+                ],
+              )),
+          Container(
+              padding: EdgeInsets.only(top: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.place_outlined, color: primary),
+                  Text(
+                    'Bambú 1',
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold),
+                  )
+                ],
+              )),
+          Container(
+              padding: EdgeInsets.fromLTRB(0, 24, 0, 0),
+              alignment: Alignment.center,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Container(
+                      child: Text(
+                    'Descripción',
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold),
+                  )),
+                  Container(
+                      padding: EdgeInsets.only(top: 12),
+                      child: Text(
+                        'Codigo: RT2512Y, imprimir las primeras 14 páginas',
+                        style: TextStyle(
+                          color: Colors.grey,
                           fontSize: 14,
-                          fontWeight: FontWeight.bold),
-                    )),
-                Container(
-                    padding: EdgeInsets.only(top: 12),
-                    child: Text(
-                      'Blanco y negro, tamaño carta',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 14,
-                      ),
-                    ))
-              ],
-            )),
-        Container(
-            padding: EdgeInsets.fromLTRB(0, 48, 16, 0),
-            alignment: Alignment.bottomRight,
-            child: FloatingActionButton(
-              child: Icon(Icons.speaker_notes),
-              onPressed: () {
-                print('Pressed!');
-              },
-            ))
-      ]),
-    );
+                        ),
+                      )),
+                  Container(
+                      padding: EdgeInsets.only(top: 12),
+                      child: Text(
+                        'Comentarios',
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold),
+                      )),
+                  Container(
+                      padding: EdgeInsets.only(top: 12),
+                      child: Text(
+                        'Blanco y negro, tamaño carta',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 14,
+                        ),
+                      ))
+                ],
+              )),
+          Expanded(
+            child: Container(
+              alignment: Alignment.bottomRight,
+              child: FloatingActionButton(
+                backgroundColor: Theme.of(context).primaryColor,
+                child: Icon(Icons.chat, color: Colors.white,),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Chat()),
+                  );
+                },
+              )))
+        ])
+      );
   }
 }

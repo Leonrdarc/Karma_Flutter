@@ -9,7 +9,6 @@ class ProfileApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Karma',
-        color: Color(0xffDD969C),
         home: Scaffold(
           // resizeToAvoidBottomInset: false,
           appBar: AppBar(
@@ -21,8 +20,11 @@ class ProfileApp extends StatelessWidget {
           ),
         ),
         theme: ThemeData(
-          primaryColor: primary,
-          accentColor: accent,
+          brightness: Brightness.light,
+          primaryColor: Color(0xffF04A75),
+          primaryColorLight: Color(0xFFF76D98),
+          accentColor: Color(0xFF1EDD28),
+          primarySwatch: Colors.pink,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ));
   }
@@ -32,7 +34,7 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Column(
+      child: Column(
       children: [
         Container(
             padding: EdgeInsets.fromLTRB(0, 40, 0, 5),
