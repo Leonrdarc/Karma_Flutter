@@ -10,12 +10,8 @@ class RegisterApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Karma',
-        color: Color(0xffDD969C),
+        color: accent,
         home: Scaffold(
-          // resizeToAvoidBottomInset: false,
-          appBar: AppBar(
-            title: Text('Karma'),
-          ),
           body: Center(
             child: Register(),
           ),
@@ -37,20 +33,7 @@ class Register extends StatelessWidget {
           Container(
             padding: EdgeInsets.fromLTRB(0, 0, 0, 15),
             child: Column(children: [
-              Image.asset('assets/ic_karma.png', color: accent),
-              RichText(
-                text: TextSpan(
-                  style: DefaultTextStyle.of(context).style,
-                  children: <TextSpan>[
-                    TextSpan(
-                        text: 'Karma',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 32,
-                            color: primary)),
-                  ],
-                ),
-              ),
+              Image.asset('assets/logo.png', color: accent, width: 200)
             ]),
           ),
           Container(

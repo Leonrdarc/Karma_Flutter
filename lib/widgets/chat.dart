@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/bubble_type.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
-import 'package:flutter_chat_bubble/clippers/chat_bubble_clipper_1.dart';
 import 'package:flutter_chat_bubble/clippers/chat_bubble_clipper_4.dart';
 
 class Chat extends StatefulWidget {
@@ -13,6 +12,20 @@ class Chat extends StatefulWidget {
 
 class _ChatState extends State<Chat> {
   List<String> entries = <String>["Hola"];
+  String msgtext = "";
+  
+  TextEditingController _controller;
+
+  void initState() {
+    super.initState();
+    entries.length = 0;
+    _controller = TextEditingController();
+  }
+
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +82,12 @@ class _ChatState extends State<Chat> {
                         ),
                         Expanded(
                           child: TextField(
+                            onChanged: (text) {
+                              setState(() {
+                                msgtext = text;
+                              });
+                            },
+                            controller: _controller,
                             decoration: InputDecoration(
                                 hintText: "Escribe un mensaje...",
                                 hintStyle: TextStyle( color: Theme.of(context).primaryColor),
@@ -99,7 +118,11 @@ class _ChatState extends State<Chat> {
                       borderRadius: BorderRadius.circular(50),
                     ),
                     onPressed: () {
-                      print("Pressed!");
+                      if(msgtext!=""){
+                        // _controller.clear();
+                        print(msgtext);
+                      }
+                      
                     },
                     child: Padding(padding: EdgeInsets.only(left:3.2), child: Icon(Icons.send_rounded, color: Colors.white))
                   )

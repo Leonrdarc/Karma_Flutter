@@ -1,3 +1,4 @@
+import 'package:Karma_flutter/widgets/login.dart';
 import 'package:Karma_flutter/widgets/profile.dart';
 import 'package:Karma_flutter/widgets/taskState.dart';
 import 'package:Karma_flutter/widgets/taskslist.dart';
@@ -102,7 +103,10 @@ class MainDrawer extends StatelessWidget {
             leading: Icon(Icons.power_settings_new, color: primary),
             title: Text('Desconectarse'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => LoginApp()),
+              );
             }),
       ],
     ));

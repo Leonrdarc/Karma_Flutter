@@ -53,7 +53,7 @@ class Profile extends StatelessWidget {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
-                        color: primary)),
+                        color: accent)),
               ],
             ),
           ),
@@ -82,7 +82,7 @@ class Profile extends StatelessWidget {
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
-                                color: primary)),
+                                color: accent)),
                       ],
                     ),
                   ),
@@ -109,7 +109,7 @@ class Profile extends StatelessWidget {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
-                        color: primary)),
+                        color: accent)),
               ],
             ),
           ),
