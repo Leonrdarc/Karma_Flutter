@@ -1,3 +1,5 @@
+import 'package:Karma_flutter/widgets/profile.dart';
+import 'package:Karma_flutter/widgets/register.dart';
 import 'package:flutter/material.dart';
 
 const primary = Color(0xffF76D98);
@@ -83,7 +85,10 @@ class Login extends StatelessWidget {
                       side: BorderSide(color: accent)),
                 )),
             onPressed: () {
-              print("Pressed!");
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfileApp()),
+              );
             },
             child: RichText(
               text: TextSpan(
@@ -100,24 +105,31 @@ class Login extends StatelessWidget {
             ),
           ),
           Container(
-            padding: EdgeInsets.fromLTRB(0, 12, 0, 12),
-            child: RichText(
-              text: TextSpan(
-                style: DefaultTextStyle.of(context).style,
-                children: <TextSpan>[
-                  TextSpan(
-                      text: 'No tienes cuenta ?',
-                      style: TextStyle(fontSize: 14, color: Colors.grey)),
-                  TextSpan(
-                      text: ' Registrarse',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                          color: Colors.grey))
-                ],
-              ),
-            ),
-          )
+              padding: EdgeInsets.fromLTRB(0, 12, 0, 12),
+              child: new GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => RegisterApp()),
+                  );
+                },
+                child: RichText(
+                  text: TextSpan(
+                    style: DefaultTextStyle.of(context).style,
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: 'No tienes cuenta ?',
+                          style: TextStyle(fontSize: 14, color: Colors.grey)),
+                      TextSpan(
+                          text: ' Registrarse',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                              color: Colors.grey))
+                    ],
+                  ),
+                ),
+              ))
         ],
       ),
     );

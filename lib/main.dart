@@ -25,8 +25,11 @@ class _MyHomePageState extends State<MyHomePage> {
     return MaterialApp(
       title: "Karma",
       routes: {
-        '/': (context) => TaskStateApp(),
-        // '/tasks': (context) => TasksLists()
+        '/': (context) => LoginApp(),
+        '/register': (context) => RegisterApp(),
+        '/profile': (context) => ProfileApp(),
+        '/tasks': (context) => TasksLists(),
+        '/tasks/state': (context) => TaskStateApp(),
       },
       theme: ThemeData(
         brightness: Brightness.light,

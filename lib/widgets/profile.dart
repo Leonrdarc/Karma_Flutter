@@ -1,3 +1,4 @@
+import 'package:Karma_flutter/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
 const primary = Color(0xffF76D98);
@@ -14,6 +15,7 @@ class ProfileApp extends StatelessWidget {
           appBar: AppBar(
             title: Text('Karma'),
           ),
+          drawer: Drawer(child: MainDrawer()),
           body: Center(
             child: Profile(),
           ),

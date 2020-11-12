@@ -1,3 +1,5 @@
+import 'package:Karma_flutter/widgets/login.dart';
+import 'package:Karma_flutter/widgets/profile.dart';
 import 'package:flutter/material.dart';
 
 const primary = Color(0xffF76D98);
@@ -106,7 +108,10 @@ class Register extends StatelessWidget {
                       side: BorderSide(color: accent)),
                 )),
             onPressed: () {
-              print("Pressed!");
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfileApp()),
+              );
             },
             child: RichText(
               text: TextSpan(
@@ -123,24 +128,31 @@ class Register extends StatelessWidget {
             ),
           ),
           Container(
-            padding: EdgeInsets.fromLTRB(0, 12, 0, 12),
-            child: RichText(
-              text: TextSpan(
-                style: DefaultTextStyle.of(context).style,
-                children: <TextSpan>[
-                  TextSpan(
-                      text: 'Ya tienes cuenta ?',
-                      style: TextStyle(fontSize: 14, color: Colors.grey)),
-                  TextSpan(
-                      text: ' Inicia sesión',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                          color: Colors.grey))
-                ],
-              ),
-            ),
-          )
+              padding: EdgeInsets.fromLTRB(0, 12, 0, 12),
+              child: new GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginApp()),
+                  );
+                },
+                child: RichText(
+                  text: TextSpan(
+                    style: DefaultTextStyle.of(context).style,
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: 'Ya tienes cuenta ?',
+                          style: TextStyle(fontSize: 14, color: Colors.grey)),
+                      TextSpan(
+                          text: ' Inicia sesión',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                              color: Colors.grey))
+                    ],
+                  ),
+                ),
+              ))
         ],
       ),
     );
