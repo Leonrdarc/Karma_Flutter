@@ -18,7 +18,6 @@ class _ChatState extends State<Chat> {
 
   void initState() {
     super.initState();
-    entries.length = 0;
     _controller = TextEditingController();
   }
 
@@ -37,13 +36,13 @@ class _ChatState extends State<Chat> {
         color: Colors.white,
         child: SafeArea(child: Column(children: [
           Expanded(child: ListView.builder(
-            padding: const EdgeInsets.symmetric(horizontal:8),
+            padding: const EdgeInsets.symmetric(horizontal:8, vertical: 15),
             itemCount: entries.length,
             itemBuilder: (BuildContext context, int index) {
               return ChatBubble(
                 clipper: ChatBubbleClipper4(type: BubbleType.sendBubble),
                 alignment: Alignment.topRight,
-                margin: EdgeInsets.only(top: 20),
+                margin: EdgeInsets.only(top: 10),
                 backGroundColor: Colors.blue,
                 child: Container(
                   constraints: BoxConstraints(
@@ -119,8 +118,12 @@ class _ChatState extends State<Chat> {
                     ),
                     onPressed: () {
                       if(msgtext!=""){
-                        // _controller.clear();
+                        _controller.clear();
+                        entries.add(msgtext);
                         print(msgtext);
+                        setState(() {
+                          msgtext = "";
+                        });
                       }
                       
                     },
