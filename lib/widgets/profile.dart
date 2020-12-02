@@ -1,3 +1,5 @@
+import 'package:Karma_flutter/model/user.dart';
+import 'package:Karma_flutter/services/database/user.dart';
 import 'package:Karma_flutter/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
@@ -30,11 +32,36 @@ class ProfileApp extends StatelessWidget {
   }
 }
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
+  @override
+  _ProfileState createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  User _data = User(
+      name: 'Cargando...',
+      email: 'Cargando...',
+      karma: 0,
+      createdAt: 'Cargando...');
+  final UserService _user = UserService();
+  Future<void> getData() async {
+    User userInfo = await _user.getMe();
+    print("newName: ${userInfo.name}");
+    setState(() {
+      _data = userInfo;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
+        child: Column(
       children: [
         Container(
             padding: EdgeInsets.fromLTRB(0, 40, 0, 5),
@@ -49,7 +76,7 @@ class Profile extends StatelessWidget {
               style: DefaultTextStyle.of(context).style,
               children: <TextSpan>[
                 TextSpan(
-                    text: 'Juan Rambal',
+                    text: _data.name,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
@@ -78,7 +105,7 @@ class Profile extends StatelessWidget {
                       style: DefaultTextStyle.of(context).style,
                       children: <TextSpan>[
                         TextSpan(
-                            text: '2',
+                            text: _data.karma.toString(),
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,

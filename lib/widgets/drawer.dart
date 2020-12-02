@@ -1,3 +1,5 @@
+import 'package:Karma_flutter/model/user.dart';
+import 'package:Karma_flutter/services/database/user.dart';
 import 'package:Karma_flutter/widgets/login.dart';
 import 'package:Karma_flutter/widgets/profile.dart';
 import 'package:Karma_flutter/widgets/taskState.dart';
@@ -7,8 +9,31 @@ import 'package:flutter/material.dart';
 const primary = Color(0xffF76D98);
 const accent = Color(0xffF04A75);
 
-class MainDrawer extends StatelessWidget {
-  const MainDrawer({Key key}) : super(key: key);
+class MainDrawer extends StatefulWidget {
+  @override
+  _MainDrawerState createState() => _MainDrawerState();
+}
+
+class _MainDrawerState extends State<MainDrawer> {
+  User _data = User(
+      name: 'Cargando...',
+      email: 'Cargando...',
+      karma: 0,
+      createdAt: 'Cargando...');
+  final UserService _user = UserService();
+  Future<void> getData() async {
+    User userInfo = await _user.getMe();
+    print("newName: ${userInfo.name}");
+    setState(() {
+      _data = userInfo;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,16 +62,15 @@ class MainDrawer extends StatelessWidget {
                   child: Text(
                     'Bievenido a Karma!',
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold
-                    ),
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
                 Container(
                   padding: EdgeInsets.only(top: 6),
                   child: Text(
-                    'Juan Rambal',
+                    _data.name,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -65,7 +89,7 @@ class MainDrawer extends StatelessWidget {
                           height: 22,
                         ),
                       ),
-                      Text('2',
+                      Text(_data.karma.toString(),
                           style: TextStyle(color: Colors.white, fontSize: 18)),
                     ]))
               ],

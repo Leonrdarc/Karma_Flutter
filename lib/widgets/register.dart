@@ -1,6 +1,10 @@
+import 'package:Karma_flutter/model/user.dart';
+import 'package:Karma_flutter/services/auth.dart';
+import 'package:Karma_flutter/services/database/user.dart';
 import 'package:Karma_flutter/widgets/login.dart';
 import 'package:Karma_flutter/widgets/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:toast/toast.dart';
 
 const primary = Color(0xffF76D98);
 const accent = Color(0xffF04A75);
@@ -24,7 +28,18 @@ class RegisterApp extends StatelessWidget {
   }
 }
 
-class Register extends StatelessWidget {
+class Register extends StatefulWidget {
+  @override
+  _RegisterState createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
+  final AuthService _auth = AuthService();
+  final UserService _user = UserService();
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passController = TextEditingController();
+  final pass2Controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -40,7 +55,7 @@ class Register extends StatelessWidget {
             padding: EdgeInsets.fromLTRB(0, 0, 0, 15),
             width: 300,
             child: TextField(
-              obscureText: true,
+              controller: nameController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Nombre',
@@ -51,7 +66,7 @@ class Register extends StatelessWidget {
             width: 300,
             padding: EdgeInsets.fromLTRB(0, 0, 0, 15),
             child: TextField(
-              obscureText: true,
+              controller: emailController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Correo',
@@ -62,6 +77,7 @@ class Register extends StatelessWidget {
             width: 300,
             padding: EdgeInsets.fromLTRB(0, 0, 0, 15),
             child: TextField(
+              controller: passController,
               obscureText: true,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
@@ -73,6 +89,7 @@ class Register extends StatelessWidget {
             width: 300,
             padding: EdgeInsets.fromLTRB(0, 0, 0, 15),
             child: TextField(
+              controller: pass2Controller,
               obscureText: true,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
@@ -90,11 +107,13 @@ class Register extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       side: BorderSide(color: accent)),
                 )),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ProfileApp()),
-              );
+            onPressed: () async {
+              await _register(
+                  context,
+                  nameController.text,
+                  emailController.text,
+                  passController.text,
+                  pass2Controller.text);
             },
             child: RichText(
               text: TextSpan(
@@ -139,5 +158,23 @@ class Register extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future _register(BuildContext context, String name, String email, String pass,
+      String confirmation) async {
+    DateTime now = new DateTime.now();
+    DateTime date = new DateTime(now.year, now.month, now.day);
+    dynamic user = await _auth.signUp(email, pass);
+    await _user.create(
+        User(name: name, email: email, karma: 2, createdAt: date.toString()));
+    if (user != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ProfileApp()),
+      );
+    } else {
+      Toast.show("Registro invalido", context,
+          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+    }
   }
 }

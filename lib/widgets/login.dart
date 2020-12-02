@@ -1,6 +1,8 @@
 import 'package:Karma_flutter/widgets/profile.dart';
 import 'package:Karma_flutter/widgets/register.dart';
 import 'package:flutter/material.dart';
+import 'package:toast/toast.dart';
+import '../services/auth.dart';
 
 const primary = Color(0xffF76D98);
 const accent = Color(0xffF04A75);
@@ -24,7 +26,16 @@ class LoginApp extends StatelessWidget {
   }
 }
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
+  @override
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  final AuthService _auth = AuthService();
+  final emailController = TextEditingController();
+  final passController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -39,6 +50,7 @@ class Login extends StatelessWidget {
           Container(
             width: 300,
             child: TextField(
+              controller: emailController,
               keyboardType: TextInputType.emailAddress,
               obscureText: false,
               decoration: InputDecoration(
@@ -51,6 +63,7 @@ class Login extends StatelessWidget {
             width: 300,
             padding: EdgeInsets.fromLTRB(0, 15, 0, 24),
             child: TextField(
+              controller: passController,
               obscureText: true,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
@@ -68,11 +81,8 @@ class Login extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       side: BorderSide(color: accent)),
                 )),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ProfileApp()),
-              );
+            onPressed: () async {
+              await _login(context, emailController.text, passController.text);
             },
             child: RichText(
               text: TextSpan(
@@ -117,5 +127,18 @@ class Login extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future _login(BuildContext context, String email, String pass) async {
+    dynamic user = await _auth.signIn(email, pass);
+    if (user != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ProfileApp()),
+      );
+    } else {
+      Toast.show("Credenciales invalidas", context,
+          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+    }
   }
 }
