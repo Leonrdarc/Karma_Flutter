@@ -3,6 +3,8 @@ class Order {
   final int state;
   final String ownerId;
   final String messengerId;
+  final String type;
+  final String description;
   final String location;
   final String extraData;
   Order(
@@ -11,7 +13,9 @@ class Order {
       this.ownerId,
       this.messengerId,
       this.extraData,
-      this.location});
+      this.location,
+      this.description,
+      this.type});
 
   Map<String, dynamic> toMap() {
     return {
@@ -21,6 +25,8 @@ class Order {
       'messengerId': messengerId,
       'extraData': extraData,
       'location': location,
+      'description': description,
+      'type': type,
     };
   }
 }

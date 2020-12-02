@@ -5,8 +5,6 @@ import 'package:Karma_flutter/widgets/register.dart';
 import 'package:Karma_flutter/widgets/profile.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:loading/indicator/ball_pulse_indicator.dart';
-import 'package:loading/loading.dart';
 
 const primary = Color(0xffF76D98);
 const accent = Color(0xffF04A75);
@@ -24,13 +22,15 @@ class FireLoad extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           return MyHomePage();
         }
-        return Container(
-          color: Colors.lightBlue,
-          child: Center(
-            child: Loading(
-                indicator: BallPulseIndicator(), size: 100.0, color: primary),
-          ),
-        );
+
+        return Container(width: 0.0, height: 0.0);
+        // return Container(
+        //   color: Colors.lightBlue,
+        //   child: Center(
+        //     child: Loading(
+        //         indicator: BallPulseIndicator(), size: 100.0, color: primary),
+        //   ),
+        // );
       },
     );
   }

@@ -23,10 +23,11 @@ class _ChatState extends State<Chat> {
     super.initState();
     _controller = TextEditingController();
     _db.collection("chat").snapshots().listen((event) {
-      event.docChanges.forEach((element) {
-        var newData = element.doc.data;
-        _logger.v(newData);
-        //entries.add(newData['message']);
+      entries.clear();
+      event.docs.forEach((element) {
+        var msg = element.get('message');
+        _logger.v(msg);
+        entries.add(msg);
       });
     });
   }
@@ -137,7 +138,7 @@ class _ChatState extends State<Chat> {
                                       .toMap());
                               if (msgtext != "") {
                                 _controller.clear();
-                                entries.add(msgtext);
+                                //entries.add(msgtext);
                                 print(msgtext);
                                 setState(() {
                                   msgtext = "";

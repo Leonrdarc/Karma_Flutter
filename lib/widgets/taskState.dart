@@ -1,7 +1,9 @@
+import 'package:Karma_flutter/model/order.dart';
+import 'package:Karma_flutter/services/auth.dart';
+import 'package:Karma_flutter/services/database/order.dart';
 import 'package:Karma_flutter/widgets/chat.dart';
 import 'package:Karma_flutter/widgets/drawer.dart';
 import 'package:flutter/material.dart';
-
 
 class TaskStateApp extends StatelessWidget {
   @override
@@ -29,21 +31,51 @@ class TaskStateApp extends StatelessWidget {
   }
 }
 
-class TaskState extends StatelessWidget {
+class TaskState extends StatefulWidget {
+  @override
+  _TaskStateFul createState() => _TaskStateFul();
+}
+
+class _TaskStateFul extends State<TaskState> {
+  Order _data = Order(
+    uid: 'Cargando...',
+    extraData: 'Cargando...',
+    location: 'Cargando...',
+    messengerId: 'Cargando...',
+    ownerId: 'Cargando...',
+    state: 0,
+  );
+  final OrderService _order = OrderService();
+  final AuthService _auth = AuthService();
+
+  Future<void> getData() async {
+    Order orders = await _order.getActualAsMessenger(_auth.getUser().email);
+    print("newOrder: ${orders.toMap()}");
+    setState(() {
+      _data = orders;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return 
-    Container(
-      margin: EdgeInsets.all(50),
-      child: 
-        Column(children: [
+    return Container(
+        margin: EdgeInsets.all(50),
+        child: Column(children: [
           Container(
               child: Text(
-                'Estado de tu favor',
-                style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold, fontSize: 26),
-                textAlign: TextAlign.center,
-                )
-              ),
+            'Estado de tu favor',
+            style: TextStyle(
+                color: Theme.of(context).primaryColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 26),
+            textAlign: TextAlign.center,
+          )),
           Container(
               padding: EdgeInsets.symmetric(vertical: 20),
               child: Icon(
@@ -52,12 +84,13 @@ class TaskState extends StatelessWidget {
                 size: 200,
               )),
           Container(
-            child: Text(
-              'Tu favor ha sido entregado y verificado correctamente',
-              style: TextStyle(color: Colors.grey, fontSize: 14),
-              textAlign: TextAlign.center,
-            )
-          ),
+              child: Text(
+            _data.state == 3
+                ? 'Tu favor ha sido entregado y verificado correctamente'
+                : 'Tu favor está en proceso',
+            style: TextStyle(color: Colors.grey, fontSize: 14),
+            textAlign: TextAlign.center,
+          )),
           Container(
               padding: EdgeInsets.only(top: 12),
               child: Row(
@@ -68,7 +101,7 @@ class TaskState extends StatelessWidget {
                     color: Theme.of(context).primaryColor,
                   ),
                   Text(
-                    'Sacar Fotocopias',
+                    _data.type,
                     style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontSize: 14,
@@ -83,7 +116,7 @@ class TaskState extends StatelessWidget {
                 children: [
                   Icon(Icons.place_outlined, color: primary),
                   Text(
-                    'Bambú 1',
+                    _data.location,
                     style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontSize: 14,
@@ -108,7 +141,7 @@ class TaskState extends StatelessWidget {
                   Container(
                       padding: EdgeInsets.only(top: 12),
                       child: Text(
-                        'Codigo: RT2512Y, imprimir las primeras 14 páginas',
+                        _data.description,
                         style: TextStyle(
                           color: Colors.grey,
                           fontSize: 14,
@@ -126,7 +159,7 @@ class TaskState extends StatelessWidget {
                   Container(
                       padding: EdgeInsets.only(top: 12),
                       child: Text(
-                        'Blanco y negro, tamaño carta',
+                        _data.extraData,
                         style: TextStyle(
                           color: Colors.grey,
                           fontSize: 14,
@@ -135,19 +168,21 @@ class TaskState extends StatelessWidget {
                 ],
               )),
           Expanded(
-            child: Container(
-              alignment: Alignment.bottomRight,
-              child: FloatingActionButton(
-                backgroundColor: Theme.of(context).primaryColor,
-                child: Icon(Icons.chat, color: Colors.white,),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Chat()),
-                  );
-                },
-              )))
-        ])
-      );
+              child: Container(
+                  alignment: Alignment.bottomRight,
+                  child: FloatingActionButton(
+                    backgroundColor: Theme.of(context).primaryColor,
+                    child: Icon(
+                      Icons.chat,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Chat()),
+                      );
+                    },
+                  )))
+        ]));
   }
 }

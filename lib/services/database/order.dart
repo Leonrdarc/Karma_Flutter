@@ -130,6 +130,8 @@ class OrderService {
             location: doc.get('location'),
             messengerId: doc.get("messengerId"),
             ownerId: doc.get("ownerId"),
+            description: doc.get("description"),
+            type: doc.get("type"),
             state: doc.get("state"),
             uid: doc.get("uid")))
         .toList();
