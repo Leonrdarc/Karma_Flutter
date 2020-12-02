@@ -1,4 +1,5 @@
 import 'package:Karma_flutter/model/user.dart';
+import 'package:Karma_flutter/services/auth.dart';
 import 'package:Karma_flutter/services/database/user.dart';
 import 'package:Karma_flutter/widgets/login.dart';
 import 'package:Karma_flutter/widgets/profile.dart';
@@ -21,6 +22,8 @@ class _MainDrawerState extends State<MainDrawer> {
       karma: 0,
       createdAt: 'Cargando...');
   final UserService _user = UserService();
+  final AuthService _auth = AuthService();
+
   Future<void> getData() async {
     User userInfo = await _user.getMe();
     print("newName: ${userInfo.name}");
@@ -127,6 +130,7 @@ class _MainDrawerState extends State<MainDrawer> {
             leading: Icon(Icons.power_settings_new, color: primary),
             title: Text('Desconectarse'),
             onTap: () {
+              _auth.logout();
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => LoginApp()),

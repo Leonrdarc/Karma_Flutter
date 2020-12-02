@@ -6,13 +6,13 @@ import '../auth.dart';
 class UserService {
   final FirebaseFirestore _user = FirebaseFirestore.instance;
   final AuthService _auth = AuthService();
-  Logger logger = Logger();
+  Logger _logger = Logger();
   Future create(User user) async {
     try {
       await _user.collection("users").add(user.toMap());
-      logger.i("Created User :)");
+      _logger.i("Created User :)");
     } catch (e) {
-      logger.e("Create User", e);
+      _logger.e("Create User", e);
     }
   }
 
@@ -30,10 +30,10 @@ class UserService {
               karma: doc.get('karma'),
               createdAt: doc.get('createdAt')))
           .toList();
-      logger.i("Get User: ${data[0]}");
+      _logger.i("Get User: ${data[0]}");
       return data[0];
     } catch (e) {
-      logger.e("Get User", e);
+      _logger.e("Get User", e);
     }
   }
 
@@ -51,10 +51,10 @@ class UserService {
               karma: doc.get('karma'),
               createdAt: doc.get('createdAt')))
           .toList();
-      logger.i("Get User: ${data[0]}");
+      _logger.i("Get User: ${data[0]}");
       return data[0];
     } catch (e) {
-      logger.e("Get User", e);
+      _logger.e("Get User", e);
     }
   }
 }
